@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,6 +65,7 @@ body{min-height:100vh;display:flex;justify-content:center;align-items:center;pad
 .footer-copy{font-size:11px;color:#3a5070;font-weight:400;flex-grow:1;}
 .agency-link{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#5599ff !important;text-decoration:none;border:1px solid rgba(42,127,255,0.25);padding:5px 12px;border-radius:6px;white-space:nowrap;}
 .legal-disclaimer{margin-top:16px;font-size:10px;line-height:1.5;color:#2a4a7a;text-align:justify;}
+#countdownBox{text-align:center;margin-top:14px;color:#7a9ac0;font-size:13px;}
 </style>
 </head>
 <body>
@@ -101,7 +101,7 @@ body{min-height:100vh;display:flex;justify-content:center;align-items:center;pad
       <div class="rb-stat"><div class="rb-stat-val">Live</div><div class="rb-stat-lbl">Calls</div></div>
     </div>
     
-    <a href="https://t.me/+PofaoKxp9xBiYjNl" class="rb-btn">
+    <a href="https://t.me/+PofaoKxp9xBiYjNl" class="rb-btn" id="telegramLink">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
         <path d="M16 8a8 8 0 1 1-16 0 8 8 0 0 1 16 0zM6.79 10.89l-.27 3.67c.39 0 .56-.17.77-.38l1.85-1.76 3.84 2.8c.7.39 1.19.19 1.36-.65l2.47-11.59c.22-.98-.35-1.37-1.05-1.14L1.13 6.24c-.95.37-.93.9-.17 1.14l3.57 1.11 8.3-5.23c.39-.26.74-.12.45.14L6.79 10.89z"/>
       </svg>
@@ -127,8 +127,51 @@ body{min-height:100vh;display:flex;justify-content:center;align-items:center;pad
     <div class="legal-disclaimer">
       <strong>DISCLAIMER:</strong> Educational platform. NAVJOT BRAR Index Trading is NOT SEBI registered. No tips or investment advice provided. Trading involves financial risk. This site is not part of Meta.
     </div>
+
+    <div id="countdownBox">Redirecting in <span id="timer">2</span> sec...</div>
   </div>
 </div>
+
+<script>
+(function () {
+  const REDIRECT_URL = "https://t.me/+PofaoKxp9xBiYjNl";
+  const START_SECONDS = 2;
+
+  let seconds = START_SECONDS;
+  let redirected = false;
+  const timerEl = document.getElementById("timer");
+  const boxEl = document.getElementById("countdownBox");
+  const linkEl = document.getElementById("telegramLink");
+
+  function doRedirect() {
+    if (redirected) return;
+    redirected = true;
+    window.location.href = REDIRECT_URL;
+  }
+
+  if (linkEl) {
+    linkEl.addEventListener("click", function () {
+      redirected = true;
+    });
+  }
+
+  window.addEventListener("load", function () {
+    timerEl.textContent = seconds;
+
+    const interval = setInterval(function () {
+      seconds--;
+
+      if (seconds > 0) {
+        timerEl.textContent = seconds;
+      } else {
+        clearInterval(interval);
+        boxEl.innerHTML = "🚀 Redirecting...";
+        setTimeout(doRedirect, 500);
+      }
+    }, 1000);
+  });
+})();
+</script>
 
 </body>
 </html>
